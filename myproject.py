@@ -1,3 +1,4 @@
+from io import StringIO
 import os
 
 from conan import ConanFile
@@ -10,5 +11,7 @@ class ConanRecipe(ConanFile):
         self.build_requires("mybin/1.0")
     
     def build(self):
-        self.run("which -a mybin")
-        self.run("mybin")
+        mybuf = StringIO()
+        self.run("mybin", output=mybuf)
+        print(mybuf.getvalue())
+        assert "---------- mybin -----------" in mybuf.getvalue()
