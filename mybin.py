@@ -17,5 +17,5 @@ class ConanRecipe(ConanFile):
 
     def package_info(self):
         bindir = os.path.join(self.package_folder, "bin")
-        self.buildenv_info.append_path("PATH", bindir)
+        self.buildenv_info.prepend_path("PATH", bindir)
         self.cpp_info.bindirs = []
